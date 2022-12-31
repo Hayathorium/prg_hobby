@@ -1,30 +1,30 @@
-#include <include/SDL.h>
+#include <SDL.h>
 #include <vector>
-#include <iostream>
 using namespace std;
-//#define PI 3.14159265358979323846264338327950288
+struct vec2
+{
+    long double x,y;
+};
 
 class Screen
 {
     SDL_Event e;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    vector<SDL_FPoint> points;
-    SDL_FPoint p;
+    vector<vec2> points;
 
     public:
 
     Screen()
     {
         SDL_Init(SDL_INIT_VIDEO);
-        SDL_CreateWindowAndRenderer(640*2, 480*2, 0, &window, &renderer);
+        SDL_CreateWindowAndRenderer(900*2, 500*2, 0, &window, &renderer);
         SDL_RenderSetScale(renderer, 2, 2);
     }
 
-    void pixel(float x, float y)
+    void pixel(long double x, long double y)
     {
-        p = {x,y};
-        points.push_back(p);
+        points.push_back({x,y});
     }
 
     void show()
@@ -36,10 +36,14 @@ class Screen
         for(auto& point : points)
         {
             SDL_RenderDrawPointF(renderer, point.x, point.y);
-            //cout << point.x << endl;
         }
 
         SDL_RenderPresent(renderer);
+    }
+
+    void clear_screen()
+    {
+        points.clear();
     }
 
     void input()
