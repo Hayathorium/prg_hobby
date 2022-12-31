@@ -18,8 +18,8 @@ class Screen
     Screen()
     {
         SDL_Init(SDL_INIT_VIDEO);
-        SDL_CreateWindowAndRenderer(900*2, 500*2, 0, &window, &renderer);
-        SDL_RenderSetScale(renderer, 2, 2);
+        SDL_CreateWindowAndRenderer(900, 500, 0, &window, &renderer);
+        SDL_RenderSetScale(renderer, 1, 1);
     }
 
     void pixel(long double x, long double y)
