@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <cmath>
 #include <iostream>
+#include <fstream>
 #define PI 3.14159265358979323846264338327950288
 using namespace std;
 
@@ -28,6 +29,7 @@ void rotate(vec3& point, long double x = 1, long double y = 1, long double z = 1
 int main(int arg, char** args)
 {
     Screen screen;
+    ofstream outfile;
     vector<vec3> points;
     bool shift = 0;
     long double dx=0, dy=0;
@@ -124,6 +126,20 @@ int main(int arg, char** args)
                 else if(event.wheel.y < 0)
                 {amp1 -= shift?0:1;
                 amp2 -= shift?1:0;}
+            }
+            // output the graph to csv file
+            if(event.button.button == SDL_BUTTON_MIDDLE)
+            {
+                outfile.open("wave.csv");
+                outfile << "x,y,z" << endl;
+                for(int i = 100; i < 800; i+=4)
+                {
+                    for (int j = -100; j < 600; j+=4)
+                    {
+                        outfile << i-100 << "," << j+100 << "," << amp1*cos(sqrt((i-t)*(i-t)+(j-u)*(j-u))/10 + r) + amp2*cos(sqrt((i-v)*(i-v)+(j-w)*(j-w))/10 + r) << endl;
+                    }
+                }
+                outfile.close();
             }
         }
     // show graph
