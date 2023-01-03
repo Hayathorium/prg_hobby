@@ -26,8 +26,8 @@ width2 = .00009
 
 while True:
     #draw setting
-    plt.xlabel("X-axis")
-    plt.ylabel("Y-axis")
+    plt.xlabel("Time")
+    plt.ylabel("Price")
     plt.xticks(x, x.strftime("%H:%M"), fontsize=10, horizontalalignment='center', rotation=45)
     plt.xticks(x, x.strftime("%H:%M"), fontsize=10, horizontalalignment='center', rotation=45)
     plt.yticks(np.arange(np.min(data['Low']), np.max(data['High']), (np.max(data['High'])-np.min(data['Low']))/10), fontsize=10)
